@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="theme/koldaf.min.css"/>
+        <link rel="stylesheet" href="theme/main.css"/>
+		<link rel="stylesheet" href="theme/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="theme/jquery.mobile.structure-1.4.2.min.css" />
+		<script src="jQuery/jquery.min.js"></script>
+		<script src="jQuery/jquery.mobile-min.js"></script>
+        <script>
+			//
+			//auto reload
+		  (function($)
+		  {
+			  $(document).ready(function()
+			  {
+				  $.ajaxSetup({cache:false,beforeSend: function(){
+					  $('#display').hide();
+					  $('#loading').show();
+				  },complete: function(){
+					  $('#loading').hide();
+					  $('#display').show();
+				  },success: function(){
+					  $('#loading').hide();
+					  $('#display').show();
+				  }
+				  });
+				  var $container = $('#display');
+				  $container.load('http://koldaftest.6te.net/trafport/engine/draft.php');
+				  var refreshId =setInterval
+				  (function()
+				  {
+					  $container.load('http://koldaftest.6te.net/trafport/engine/draft.php');},60000);
+			  });
+		  })(jQuery);
+		</script>
+	</head>
+	<body>
+    	<!--This is the first page-->
+        <div data-role="page" id="home" data-theme="g" data-position="fixed">
+        	<!--Panel shows here-->
+            <!--Slide panel starts here-->
+            <div data-role="panel" data-theme="g" data-position="left" data-display="push" id="panel">
+            	
+                <!--<div data-role="controlgroup">        	
+                <a href="#help" >  Be a Reporter </a>
+                <a href="#about" data-icon="info"> Report a Crash Scene </a>
+                <a href="#team" data-icon="bars"> The Team </a>
+                </div>-->
+                <div data-role="header" class="ui-btn">Traffic Menu </div>
+               <div data-role="controlgroup">
+               
+    <a href="#reg" class="ui-btn ui-corner-all">Be a Reporter</a>
+    <a href="#" class="ui-btn ui-corner-all ui-icon-alert">Report Emergency</a>
+    <a href="http://www.nysc.gov.ng/" class="ui-btn ui-corner-all ui-icon-alert" data-ajax="false">About NYSC</a>
+    <a href="http://frsc.gov.ng/about-us/what-we-do" class="ui-btn ui-corner-all ui-icon-alert" data-ajax="false">About FRSC</a>
+    <a href="#" class="ui-btn ui-corner-all ui-icon-carat-d">Developer</a>
+</div>
+            </div>
+        	<header data-role="header" data-position="fixed">
+            	<h1>Traffic Tracker</h1>
+            </header>
+            <article data-role="content" class="ui-content">
+            	<img src="images/koldaf.gif" id="loading" alt="Please Wait" width="80%" height="50%">
+                <div id="display">
+                	
+                </div>
+            </article>
+        	<footer  data-role="footer" data-position="fixed">
+            	<nav data-role="navbar" class="ui-controlgroup-controls" align="center">
+                	<a href="#panel" ><img src="images/menu.png" class="ui-nodisc-icon myicon"> Menu </a>
+                    <a href="#login" > <img src="images/login.png" class="ui-nodisc-icon myicon">Log In </a>
+                    <a href="#reg" > <img src="images/user.png" class="ui-nodisc-icon myicon">Join </a>
+                    <a href="#report" > <img src="images/mic.png" class="ui-nodisc-icon myicon"> Report </a>
+                </nav>
+            </footer>
+        </div>
+            	<!--This is the Loginpage-->
+        <div data-role="page" id="login" data-theme="g" data-position="fixed" data-title="Login" data-add-back-btn="true" data-back-btn-text="Take me Back">
+        	<header data-role="header">
+            <a href="#home" data-icon="home"> Take me Home </a>
+            <h1><big>Log In</big></h1>
+            </header>
+            <article data-role="content" class="ui-content">
+            	Log In Here
+                <form method="post" class="login" action="http://koldaftest.6te.net/trafport/engine/login.php" data-ajax="false">
+                	<p><input type="text" name="username" placeholder="Input Your Username"/></p>
+                    <p><input type="password" name="pass" placeholder="Input Your Password"/></p>
+                    <p><input type="submit" name="login" value="Log In"></p>
+                </form>
+				<span id="wait">Please Wait...</span>
+            </article>
+        	<footer  data-role="footer" data-position="fixed">
+            	<nav data-role="navbar" class="ui-controlgroup-controls" align="center">
+                    <a href="#reg" > <img src="images/user.png" class="ui-nodisc-icon myicon">Join </a>
+                    <a href="#report" > <img src="images/mic.png" class="ui-nodisc-icon myicon"> Report </a>
+                </nav>
+            </footer>
+            </div>
+            
+            <!--This is the Register page-->
+        <div data-role="page" id="reg" data-theme="g" data-position="fixed" data-title="Register" data-dom-cache="no-cache">
+        	<header data-role="header">
+            <a href="#home" data-icon="home"> Take me Home </a>
+            <h1><big>Become a Member</big></h1>
+            </header>
+            <article data-role="main" class="ui-content">
+                <form method="post" action="http://koldaftest.6te.net/trafport/engine/register.php" class="reg" data-ajax="false">
+                
+                	<label for="username" class="ui-hidden-accessible"> Username </label>
+                    <input type="text" name="username" placeholder="Input Your Username"/>
+                    
+                    <label for="pass" class="ui-hidden-accessible"> Password </label>
+                    	<input type="password" name="pass" placeholder="Input Your Password"/>
+                        
+                    <label for="pass2" class="ui-hidden-accessible"> Password </label>
+                    	<input type="password" name="pass2" placeholder="Password Again"/>
+                        
+                        <label for="phone" class="ui-hidden-accessible"> Phone Number </label>
+                    	<input type="tel" name="phone" placeholder="Phone Number"/>
+                        
+                        <label for="email" class="ui-hidden-accessible"> E-mail </label>
+                    	<input type="email" name="email" placeholder="E-mail Address"/>
+                        
+					<label for="location" class="ui-hidden-accessible"> Location </label>
+                    <select name="location" data-mini="true">
+                    	<option value=""> Select Location You Want to Report From </option>
+                        <option value="offagarrage">Offa Garage </option>
+                        <option value="Gaakanbi">Gaa Akanbi</option>
+                        <option> And Other Locations </option>
+                    </select>
+                       <input type="submit" name="signup" value="Sign Up">
+                </form>
+                <span id="wait">Please Wait...</span>
+            </article>
+        	<footer  data-role="footer" data-position="fixed">
+            	<nav data-role="navbar" class="ui-controlgroup-controls" align="center">
+                    <a href="#report" > <img src="images/mic.png" class="ui-nodisc-icon myicon"> Report </a>
+                </nav>
+            </footer>
+            <script>
+            //Signup Form
+	$('form.reg').on('submit',function(){
+	var that = $(this),
+		url = that.attr('action'),
+		type = that.attr('method');
+		var data = that.serialize();
+		$.ajax({
+			url:url,
+			type:type,
+			data: data,
+			success: function(response)
+			{
+				$('#wait').hide();
+				if(response == 1){	alert ("Please Complete all Fields");}
+				else if(response == 2){	alert ("Please input a valid phone number");}
+				else if(response == 3){	alert ("Password not matched");}
+				else if(response == 4){	alert ("Please Input a Valid E-mail Address");}
+				else if(response == 5){	alert ("Username and Password Not Available \n Try Another one");}
+				else if(response == 6){	alert ("There was a fatal error");}
+				else if(response == 7){	alert ("Registration Completed");}
+				else { alert(response); }					
+			},
+			error: function()
+			{
+				alert("An error Just Occur,\n Please Check Your Internet Connectivity");
+			},
+			beforeSend: function()
+			{
+				$('#wait').show();
+				//$('#reg').attr('disable')
+			}
+	});
+	return false;
+	
+})
+//Login Form
+$('form.login').on('submit',function(){
+	var that = $(this),
+		url = that.attr('action'),
+		type = that.attr('method');
+		var data = that.serialize();
+		$.ajax({
+			url:url,
+			type:type,
+			data: data,
+			success: function(response)
+			{
+				$('#wait').hide();
+				if(response == 1){	alert("Please Complete all Fields");}
+				else if(response == 11){	alert("Username and Password not matched");}
+				else if(response == 111) { window.location='engine/index.php';}
+				else { alert(response); }					
+			},
+			error: function()
+			{
+				alert("An error Just Occur,\n Please Check Your Internet Connectivity");
+			},
+			beforeSend: function()
+			{
+				$('#wait').show();
+				//$('#reg').attr('disable')
+			}
+	});
+	return false;
+	
+})
+</script>
+            </div>
+	</body>
+</html>
